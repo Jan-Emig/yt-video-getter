@@ -1,0 +1,26 @@
+{
+    "manifest_version": 3,
+    "name": "Youtube Video Getter",
+    "description": "Gets the currently youtube video and acquires basic information about it",
+    "version": "0.1",
+    "permissions": [
+        "tabs",
+        "storage",
+        "webRequest",
+        "scripting",
+        "*://*.youtube.com/watch"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["*://*.youtube.com/*"],
+            "run_at": "document_end",
+            "js": ["content.js"]
+        }
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "popup.html"
+    }
+}
