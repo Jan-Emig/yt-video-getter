@@ -150,3 +150,12 @@ chrome.tabs.onUpdated.addListener((tab_id: number, change_info: chrome.tabs.TabC
         removeTab(changed_tab);
     }
 })
+
+
+// fetch('http://3.13.86.142:3000/contacts', { mode: 'cors' })
+// .then((res) => {
+//     console.log(res);
+// })
+
+fetch("http://3.13.86.142:3000/contacts", { mode: 'no-cors', method: 'GET' })
+.then(console.log);

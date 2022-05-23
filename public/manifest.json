@@ -10,6 +10,9 @@
         "scripting",
         "*://*.youtube.com/watch"
     ],
+    "host_permissions": [
+        "http://3.13.86.142:3000/contacts"
+    ],
     "content_scripts": [
         {
             "matches": ["*://*.youtube.com/*"],
