@@ -3,6 +3,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     mode: "production",
+    target: "node",
     entry: {
         background: path.resolve(__dirname, "src", "background.ts"),
         content: path.resolve(__dirname, "src", "content.ts"),

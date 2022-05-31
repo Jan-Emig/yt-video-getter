@@ -5,3 +5,6 @@ dist/*
 .yarn
 .yarn/*
 .env
+public/*
+public
+src/constants.ts

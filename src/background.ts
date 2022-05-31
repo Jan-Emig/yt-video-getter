@@ -1,3 +1,4 @@
+import { Constants } from "./constants";
 import ExchangeInfo from "./dts/ExchangeInfo";
 import VideoInfo from "./dts/VideoInfo";
 import { isYtVideoTab } from "./helper";
@@ -8,6 +9,7 @@ interface ExtendedChromeTab extends chrome.tabs.Tab {
 
 const REQUEST_INTERVAL_DELAY = 10000;
 const MIN_REQUEST_DELAY = 5000;
+let last_video_info: VideoInfo | null = null;
 let last_request: number | null = null;
 let tabs: ExtendedChromeTab[] = [];
 let request_interval: NodeJS.Timer | null = null;
@@ -121,8 +123,42 @@ const requestTabInformation = (force_request = false) => {
     if (comm_tab?.id && (force_request || !last_request || Date.now() - last_request > MIN_REQUEST_DELAY)) {
         chrome.tabs.sendMessage(comm_tab.id, { action: 'request-data' }, (video_info: VideoInfo) => {
             last_request = Date.now();
+            if (video_info) {
+                last_video_info = video_info;
+                uploadCurrentVideoTimeStatus(video_info)
+            }
+            console.log(last_video_info);
         });
     }
+}
+
+/**
+ * Pushes the video's current time status to the LaMetric's app
+ */
+const uploadCurrentVideoTimeStatus = (video_info: VideoInfo) => {
+    return;
+    // if (video_info.timestamp == null) return;
+    // const push_data = {
+    //     "frames":[
+    //         {
+    //             "icon": 10247,
+    //             "text": video_info.timestamp / 1000 / 60
+    //         }
+    //     ]
+    // }
+    // fetch(Constants.PUSH_URL, {
+    //     method: 'POST',
+    //     mode: 'no-cors',
+    //     headers: {
+    //         'X-ACCESS-TOKEN': Constants.ACCESS_TOKEN,
+    //         'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify(push_data)
+    // })
+    // .then(res => {
+    //     console.log(res.body);
+    // })
+    // .catch(err => console.log(err.message));
 }
 
 /**
@@ -157,5 +193,13 @@ chrome.tabs.onUpdated.addListener((tab_id: number, change_info: chrome.tabs.TabC
 //     console.log(res);
 // })
 
-fetch("http://3.13.86.142:3000/contacts", { mode: 'no-cors', method: 'GET' })
-.then(console.log);
+// fetch("http://3.13.86.142:3000/contacts", { mode: 'no-cors', method: 'GET' })
+// .then(console.log);
+
+// fetch("http://192.168.178.56:4343/api/v1/dev/widget/update/com.lametric.e4e6006ee8c67f6e6767f305dc866fc6/1", { mode: 'no-cors' })
+// })
+
+// fetch("http://192.168.178.56:4343/api/v1/dev/widget/update/com.lametric.e4e6006ee8c67f6e6767f305dc866fc6/1", { mode: 'no-cors', method: 'POST',  })
+// .then(console.log);
+
+// fetch()

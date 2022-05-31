@@ -8,4 +8,5 @@ export default interface VideoInfo {
     views: number | null;
     channel: string | null;
     volume: number | null
+
 }

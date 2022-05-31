@@ -8,10 +8,11 @@
         "storage",
         "webRequest",
         "scripting",
-        "*://*.youtube.com/watch"
+        "*://*.youtube.com/watch",
+        "https://192.168.178.56:4343/api/v1/dev/widget/update/com.lametric.e4e6006ee8c67f6e6767f305dc866fc6/1"
     ],
     "host_permissions": [
-        "http://3.13.86.142:3000/contacts"
+        "https://192.168.178.56:4343/api/v1/dev/widget/update/com.lametric.e4e6006ee8c67f6e6767f305dc866fc6/1"
     ],
     "content_scripts": [
         {
